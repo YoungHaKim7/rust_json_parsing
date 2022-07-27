@@ -20,7 +20,11 @@ async fn main() -> Result<(), reqwest::Error> {
 
     let new_todo: Todo = reqwest::Client::new()
         .post("https://jsonplaceholder.typicode.com/todos")
-        .json(&new_todo)
+        .json(&serde_json::json!({
+            "userId": 1,
+            "title": "Subscribe to Let's Get Rusty".to_owned(),
+            "completed": false
+        }))
         .send()
         .await?
         .json()
